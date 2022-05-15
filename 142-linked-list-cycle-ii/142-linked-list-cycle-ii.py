@@ -26,15 +26,9 @@ class Solution:
                 break
                 
         # has cycle. find cycle enterance.
-        p = head
-        while True:
-            while True:
-                if p == p1:
-                    return p
-                p1 = p1.next
-                if p1 == p2:
-                    break
-                
-            p = p.next
+        p1 = head
+        while p1 != p2:
+            p1 = p1.next
+            p2 = p2.next
             
-        return None
+        return p1
