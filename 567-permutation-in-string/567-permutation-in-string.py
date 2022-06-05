@@ -2,13 +2,11 @@ class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
         if len(s1) > len(s2):
             return False
-        # s1 dict
-        s1d = dict()
-        for c in s1:
-            s1d[c] = s1d.get(c, 0)+1
         # initial window
+        s1d = dict()
         s2d = dict()
         for i in range(len(s1)):
+            s1d[s1[i]] = s1d.get(s1[i], 0)+1
             s2d[s2[i]] = s2d.get(s2[i], 0)+1
         # move window
         l, r = 0, i
