@@ -12,11 +12,4 @@ class Solution:
         commons = list(set(r1.keys()) & set(r2.keys()))
         mergedR = {r: r1[r]+r2[r] for r in commons}
         sortedR = sorted(mergedR.items(), key = lambda item: item[1])
-        least = sortedR[0][1]
-        ans = list()
-        for (r, i) in sortedR:
-            if i == least:
-                ans.append(r)
-            else:
-                break
-        return ans
+        return list(map(lambda x: x[0], filter(lambda x: x[1] == sortedR[0][1], sortedR)))
