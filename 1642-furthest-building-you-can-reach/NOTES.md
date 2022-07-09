@@ -60,9 +60,7 @@ class Solution:
 
 priority queue 를 쓰고 생각해보니, 결국 중요한 것은 사다리 찬스를 쓰는 것, 그러면 몇 개의 벽돌을 아낄 수 있는지 여부였다.
 
-매번 queue 를 순회하지않아도, queue 안에 있는 벽돌의 갯수를 파악하는 것이 가능해보였다.
-
-queue 가 가득 찼는지 여부를 따지는 부분을 생각해보니, 그 다음 과정은 자연스레 풀렸다.
+가장 많은 차이를 사다리가 감당한다는 것만 보장하면 된다.
 
 `O(NlogN)`
 
@@ -70,32 +68,26 @@ queue 가 가득 찼는지 여부를 따지는 부분을 생각해보니, 그 �
 from queue import PriorityQueue
 
 class Solution:
-    def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
+    def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:        
         
         if len(heights) == 1:
             return 0
         
-        q = PriorityQueue(maxsize=ladders)
-        totalBricks = bricksInQue = 0
+        b, q = 0, PriorityQueue()
+        
         for i in range(1, len(heights)):
             diff = heights[i]-heights[i-1]
-            if diff < 0:
-                continue
-            totalBricks += diff
-            if ladders > 0: # 사다리가 0 개이면, queue maxsize 가 제대로 역할을 하지못함
-                if q.full():
-                    minDiff = q.get()
-                    if diff > minDiff:
-                        q.put(diff)
-                        bricksInQue += (diff-minDiff)
-                    else:
-                        q.put(minDiff)
-                else:
+            if diff > 0:
+                if ladders > 0:
                     q.put(diff)
-                    bricksInQue += diff
-        
-            if bricks < (totalBricks-bricksInQue):
+                    if q.qsize() > ladders:
+                        b += q.get()
+                else:
+                    b += diff
+                        
+            if b > bricks:
                 return i-1
         
         return len(heights)-1
 ```
+
