@@ -64,6 +64,8 @@ priority queue 를 쓰고 생각해보니, 결국 중요한 것은 사다리 찬
 
 queue 가 가득 찼는지 여부를 따지는 부분을 생각해보니, 그 다음 과정은 자연스레 풀렸다.
 
+`O(NlogN)`
+
 ```
 from queue import PriorityQueue
 
