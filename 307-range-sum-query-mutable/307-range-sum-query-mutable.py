@@ -19,6 +19,7 @@ class NumArray:
         
         return self.seg[(left, right)]
     
+    # 이해가 어려웠던 부분
     def queryTree(self, left, right, targetLeft, targetRight):
         if targetLeft > right or targetRight < left:
             return 0
